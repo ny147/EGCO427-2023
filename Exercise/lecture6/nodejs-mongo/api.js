@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongodb')
+const {MongoClient, Collection} = require('mongodb')
 const express = require('express')
 var app = express()
 
@@ -34,6 +34,24 @@ async function showAge(findAge){
     return findResult
 }
 
+async function insertStudent(newStudent){
+    var insertResult = await collection.insertOne(newStudent);
+    return insertResult;
+}
+
+async function updateStudent(updateStudent){
+    let query = {id : parseInt(updateStudent.id)}
+    let newValue = {$set: {lastname : updateStudent.lastname}}
+    const UpdateResult = await collection.updateOne(query,newValue);
+    return UpdateResult;
+}
+
+async function deleteStudent(deleteStudent){
+
+    let query = {id :  parseInt(deleteStudent)}
+    const deleteResult = await collection.deleteOne(query);
+    return deleteResult
+}
 
 dbConnect().catch(console.error)
 
@@ -64,6 +82,35 @@ app.get('/showage/:age',(req,res)=>{
 })
 
 app.post('/insertstudent',(req,res) => {
+    console.log("Add new student : %s",req.body)
+    insertStudent(req.body).then(
+        (result) => {
+            console.log(result);
+            res.json(result)
+        }
+    )
+    
+})
+
+app.put('/updatestudent',(req,res) => {
+    console.log("updatestudent student : %s",req.body)
+    updateStudent(req.body).then(
+        (result) => {
+            console.log(result);
+            res.json(result)
+        }
+    )
+    
+})
+
+app.delete('/deletestudent/:id',(req,res) => {
+    console.log("deletestudent student : %s",req.params.id)
+    deleteStudent(req.params.id).then(
+        (result) => {
+            console.log(result);
+            res.json(result)
+        }
+    )
     
 })
 
