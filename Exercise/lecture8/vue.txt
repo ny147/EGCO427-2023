@@ -1,0 +1,319 @@
+<template>
+  <h1>{{ Uppercase()}}</h1>
+    <h2>
+    {{UpppercaseFirst()}}
+  </h2>
+  <h2>
+    {{UpFirstWord()}}
+  </h2>
+  <p>
+    {{firstname + ' ' + lastname}}
+  </p>
+  call function
+  <p>
+    {{getFullname()}}
+  </p>
+  callgetFullnameinput(firstname,lastname)
+  <p>
+    {{getFullnameInput(firstname,lastname)}}
+  </p>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello world!',
+      firstname: "Bob",
+      lastname: "Cat"
+    }
+  }
+  ,methods:{
+    getFullname: function(){
+      return this. firstname + ' ' + this.lastname
+    },
+    getFullnameInput: function(firstn,lastn){
+		return firstn + ' ' + lastn      
+    },
+    Uppercase: function(){
+      return this.msg.toUpperCase()
+    },
+    getUppercaseF: function(input){
+  	return input.toUpperCase()
+     },
+    UpppercaseFirst: function(){
+      const new_msg = this.msg.charAt(0).toUpperCase() + this.msg.slice(1);
+
+      return new_msg 
+    },
+      UpFirstWord: function(){
+     	
+      let [word1,word2] = this.msg.split(' ');
+      let word1Upper = word1.charAt(0).toUpperCase() + word1.slice(1);
+      let word2Upper = word2.charAt(0).toUpperCase() + word2.slice(1);
+      return  word1Upper +' '+ word2Upper
+    }
+  }
+}
+</script>
+
+<style>
+
+  p {
+  color : blue;
+  }
+</style>
+
+
+************link*****************
+<template>
+  <h1>{{msg}}</h1>
+  Linknotwork
+  <a href={{url}} target = '_blank'>vue website</a><br>
+   Linkwork
+  <a v-bind:href="url" target = '_blank'>vue website</a>
+	
+  <p  v-bind:title="msg">Show Title</p>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello world!',
+			url: 'www.vuejs.org'
+    }
+  }
+
+}
+</script>
+
+<style>
+
+  p {
+  color : blue;
+  }
+</style>
+
+*****************************Click Event**********************************
+<template>
+  <h1>{{msg}}</h1>
+  <div v-on:click = "DivClickMethod">
+    <button v-on:click.stop="ClickMethod">
+       Click me
+       </button>
+  </div>
+  <button v-on:click.once="ClickMethod">
+      Click once
+   </button>
+   
+ 
+
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello world!',
+		
+    }
+  },
+  methods:{
+    ClickMethod: function(){
+      console.log(event)
+      alert('You clicked button')
+    }
+  }
+
+}
+</script>
+
+<style>
+
+  p {
+  color : blue;
+  }
+</style>
+
+******** key up *************
+<template>
+ <div class = "form">
+    <h1>{{msg}}</h1>
+  Any	Event	keyup
+  <input type='text' v-on:keyup="ClickMethod"/>
+  Enter	key	Event
+  <input type='text' v-on:keyup.enter="ClickMethod"/>
+  Space	key	Event
+  <input type='text' v-on:keyup.space="ClickMethod"/>
+   Enter& Space	key	Event
+  <input type='text' v-on:keyup.enter.space="ClickMethod"/>
+  Shift Enter key	Event
+  <input type='text' v-on:keyup.shift.enter="ClickMethod"/>
+  Shift Click key	Event
+  <input type='text' v-on:click.shift="ClickMethod"/>
+  <button v-on:click="clickMethod">
+    Click me
+  </button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello world!',
+		
+    }
+  },
+  methods:{
+    ClickMethod: function(){
+      console.log(event)
+      alert('You clicked button')
+    }
+  }
+
+}
+</script>
+	
+<style>
+
+  p {
+  color : blue;
+  },
+ .form{
+    display: flex;
+  	flex-direction: column;
+  }
+</style>
+
+
+********** v-model , v-html*************
+<template>
+	<h1>
+    {{msg}}
+  </h1>
+  <input v-model="msg">
+  <div v-html="html">
+    
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'hello world!',
+			html: "<p>Show data </p>"
+    }
+  },
+  methods:{
+    ClickMethod: function(){
+      console.log(event)
+      alert('You clicked button')
+    }
+  }
+
+}
+</script>
+	
+<style>
+
+  p {
+  color : blue;
+  }
+ 
+</style>
+
+********change title *************
+<template>
+  <h1>{{movieTitle}}</h1>
+  <button @click="movieTitle = 'Starwares: new hope'">Change Title</button>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      movieTitle: 'Starwars'
+
+    }
+  },
+  methods: {
+    
+  }
+  
+}
+</script>
+
+<style>
+  p {
+    color: blue;
+  }
+</style>
+
+*** if else ***
+<template>
+  <h1 v-if="ItemInStock>10">{{ItemInStock}} item is stock</h1>
+  <h1 v-else-if="ItemInStock>0">{{ItemInStock}} Herry up, there are few  item left</h1>
+  <p v-else>
+    Too bad, we're all out of stock!
+  </p>
+  
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      ItemInStock: 10
+
+    }
+  },
+  methods: {
+    
+  }
+  
+}
+</script>
+
+<style>
+  p {
+    color: blue;
+  }
+</style>
+
+*************** show MEssage ***************
+<template>
+
+  <p v-show="isShow">
+    Hello world
+  </p>
+  <button @click="toggleMsg">
+    Show/hide
+  </button>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isShow : true
+
+    }
+  },
+  methods: {
+    toggleMsg:function (){
+      this.isShow = !this.isShow
+      return isShow
+    }
+  }
+  
+}
+</script>
+
+<style>
+  p {
+    color: blue;
+  }
+</style>
