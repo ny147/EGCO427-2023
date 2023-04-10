@@ -1,7 +1,8 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId} = require('mongodb');
 
-const url = 'mongodb://127.0.0.1:27017';
-const dbName = 'egco427';
+// const url = 'mongodb://127.0.0.1:27017';
+const url = 'mongodb+srv://webdev:c1OLNZe6ObFsROt7@webservice.ez0zvzj.mongodb.net/?retryWrites=true&w=majority'
+const dbName = 'Contacts';
 
 let db;
 
@@ -23,4 +24,5 @@ function get() {
 module.exports = {
   connect,
   get,
+  ObjectId
 };

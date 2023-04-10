@@ -1,15 +1,10 @@
-// 
+
 var express = require('express')
 var app = express()
 var fs = require('fs');
 let path = "myjsonfile.json"
 app.use(express.json()) //For JSON requests
 app.use(express.urlencoded({ extended: true }));
-
-// if (fs.existsSync(path)) {
-//     console.log("File exist");
-// }
-// else { fs.writeFileSync(path, '{"list":[]}');  }
 
 fs.writeFileSync(path, '{"array":[]}');
 
@@ -42,3 +37,5 @@ app.post('/showData', function (req, res) {
 })
 
 app.listen(8081)
+
+

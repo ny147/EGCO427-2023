@@ -50,7 +50,7 @@ app.get('/api',function(req,res){
     })
 })
 
-app.get('/api/protected', ensureToken, (req, res) => {
+app.get('/api/protected',ensureToken,  (req, res) => {
   jwt.verify(req.token, 'egci4276272', function(err, data) {
     if (err) {
       res.sendStatus(403);
